@@ -4,15 +4,25 @@ const SmoothiesSchema = new mongoose.Schema(
   {
     method: {
       type: String,
-      required: [true, "Please tell us how you'll recieve your smoothie!"],
+      required: [true, "Please select an option"],
       // drop-down options
-      enum: ["Pick-up in Store", "Delivery"],
+      enum: [
+        "Pick-up", 
+        "Delivery",
+      ],
     },
+
     size: {
       type: String,
       required: [true, "Please select a size for your smoothie!"],
-      enum: ["Small", "Medium", "Large", "SuperSip"],
+      enum: [
+      "Small",
+       "Medium", 
+       "Large", 
+       "SuperSip",
+      ],
     },
+
     quantity: {
       type: Number,
       required: [true, "Please select a quantity for your smoothie order!"],
