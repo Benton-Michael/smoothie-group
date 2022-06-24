@@ -4,20 +4,22 @@ const createNewSmoothie = (req, res) => {
   // CRUD - Create
   Smoothie.create(req.body)
     .then((newSmoothie) => {
-      res.json({ newSmoothie });
+      res.status(201).json(newSmoothie);
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res
+      .status(400)
+      .json({ message: "Error in createNewSmoothie", error: err });
     });
 };
 // Read
 const getAllSmoothies = (req, res) => {
-  Smoothie.find()
+  Smoothie.find({})
     .then((allSmoothies) => {
-      res.json({ allSmoothies });
+      res.json(allSmoothies);
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res.status(400).json({ message: "Error in getAllSmoothies", error: err });
     });
 };
 
@@ -25,10 +27,12 @@ const getAllSmoothies = (req, res) => {
 const getOneSmoothie = (req, res) => {
   Smoothie.findOne({ _id: req.params.id })
     .then((queriedSmoothie) => {
-      res.json({ queriedSmoothie });
+      res.status(201).json(queriedSmoothie);
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res
+      .status(400)
+      .json({ message: "Error in getOneSmoothie", error: err });
     });
 };
 
@@ -39,10 +43,12 @@ const updateSmoothie = (req, res) => {
     runValidators: true,
   })
     .then((updatedSmoothie) => {
-      res.json({ updatedSmoothie });
+      res.status(201).json(updatedSmoothie);
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res
+      .status(400)
+      .json({ message: "Error in updateSmoothie", error: err });
     });
 };
 
@@ -50,10 +56,12 @@ const updateSmoothie = (req, res) => {
 const deleteSmoothie = (req, res) => {
   Smoothie.deleteOne({ _id: req.params.id })
     .then((deletedResponse) => {
-      res.json({ deletedResponse });
+      res.status(201).json(deletedResponse);
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res
+      .status(400)
+      .json({message: "Error in deleteSmoothie", error: err });
     });
 };
 
