@@ -6,4 +6,5 @@ module.exports = (app) => {
   // app.get('/', (req, res) => {
   //     res.json({msg: "all set up"}); // From Postman:  "msg": "all set up"
   app.post("/api/smoothie", smoothieController.createNewSmoothie);
+  app.get("/api/smoothie/_id:", smoothieController.updateSmoothie);
 };
