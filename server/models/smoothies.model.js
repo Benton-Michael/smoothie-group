@@ -84,6 +84,7 @@ const SmoothiesSchema = new mongoose.Schema(
         "Hemp",
       ],
     },
+    favorited: {type: Boolean, default:false}
   },
   {
     timestamps: true,
