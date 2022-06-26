@@ -17,9 +17,9 @@ const SmoothiesSchema = new mongoose.Schema(
       required: [true, "Please select a size for your smoothie!"],
       enum: [
       "Small",
-       "Medium", 
-       "Large", 
-       "SuperSip",
+      "Medium", 
+      "Large", 
+      "SuperSip",
       ],
     },
 
