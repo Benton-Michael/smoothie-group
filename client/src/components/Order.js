@@ -2,7 +2,15 @@ import React from 'react'
 
 const Order = () => {
     return (
-        <div>Order</div>
+        <div>
+            <h2>Order</h2>
+            <div>Create your own Smoothie</div>
+            <div>Smoothie Products</div>
+
+
+
+
+        </div>
     )
 }
 
