@@ -68,7 +68,7 @@ const login = async (req, res) => {
             expires: new Date(Date.now() + 259200000),
           })
           .json({
-            successMessage: "user created",
+            successMessage: "user logged in!",
             user: {
               _id: userDoc._id,
               email: userDoc.email,
