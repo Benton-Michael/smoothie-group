@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
-  const { setIsLoggedIn } = props;
+  const { isLoggedIn, setIsLoggedIn } = props;
   const navigate = useNavigate();
   const [errors, setErrors] = useState("");
   const [user, setUser] = useState({
@@ -20,8 +20,14 @@ const Login = (props) => {
         withCredentials: true,
       })
       .then((res) => {
+        console.log("----------");
         console.log("res", res.data);
-        setIsLoggedIn(true);
+        console.log("----------");
+        console.log(res.data.user._id);
+        setIsLoggedIn(res.data.user._id);
+        console.log("----------");
+        console.log("IsLoggedIn", isLoggedIn);
+        console.log("----------");
         navigate("/new");
       })
       .catch((err) => {

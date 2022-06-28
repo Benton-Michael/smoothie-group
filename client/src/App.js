@@ -15,7 +15,7 @@ function App() {
         <Menu isLoggedIn={isLoggedIn}/>
 
         <Routes>
-          <Route path='/' element={<Welcome setIsLoggedIn={setIsLoggedIn}/>} default />
+          <Route path='/' element={<Welcome isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} default />
           <Route path="/all" element={<AllSmoothies/>} />
           <Route path='/new' element={<CreateSip />} />
           <Route path='/account' element={<Account/>} />

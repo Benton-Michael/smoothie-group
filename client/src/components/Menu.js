@@ -15,6 +15,10 @@ const Menu = (props) => {
     if (userToken) {
       const user = jwtDecode(userToken);
       setUser(user);
+      console.log("--------");
+      console.log(user);
+      console.log(isLoggedIn);
+      console.log("--------");
     }
   }, [isLoggedIn]);
 
