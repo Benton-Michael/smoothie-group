@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import Moment from 'react-moment';
+import { useNavigate } from "react-router-dom";
 
 const Account = (props) => {
+    const [user, setUser] = useState('');
+    const { isLoggedIn } = props;
+    console.log(user);
+    const navigate = useNavigate();
+    useEffect(() => {
+        const userToken = Cookies.get("userToken");
+        if (userToken) {
+            const user = jwtDecode(userToken);
+            setUser(user);
+        }
+    }, [isLoggedIn]);
 
     return (
         <div>
@@ -14,9 +30,10 @@ const Account = (props) => {
                     />
                     </div>
                     <div className="p-6 flex flex-col justify-start">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Name Placeholder</h5>
-                        <p className="text-gray-700 text-base mb-4">Email Placeholder</p>
-                        <p className="text-gray-600 text-xs">Updated Date placeholder</p>
+                        <h5 className="text-gray-900 text-xl font-medium mb-2">{user.firstName} {user.lastName}</h5>
+                        <p className="text-gray-700 text-base mb-4">{user.email}</p>
+                        <p className="text-gray-600 text-xs">Last Updated <Moment format="MM/DD/YYYY" date={user.updatedAt} /></p>
+                        <p className="text-gray-600 text-xs">User Created <Moment format="MM/DD/YYYY" date={user.createdAt} /></p>
                         <div className="py-3 px-6 border-t border-gray-300 text-gray-600">
                         <button type="button" 
                         className="dark:bg-green-800 hover:bg-slate-400 text-white py-2 px-2 rounded focus:outline-none focus:shadow-outline" >
