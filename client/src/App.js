@@ -5,6 +5,7 @@ import CreateSip from './components/CreateSip';
 import NotFound from './components/NotFound/NotFound';
 import {useState} from 'react';
 import AllSmoothies from './components/AllSmoothies';
+import Account from './components/Account';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -16,7 +17,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Welcome setIsLoggedIn={setIsLoggedIn}/>} default />
           <Route path="/all" element={<AllSmoothies/>} />
-          <Route path='/new' element={<CreateSip/>} />
+          <Route path='/new' element={<CreateSip />} />
+          <Route path='/account' element={<Account/>} />
+
           <Route path='*' element={<NotFound/>} />
 
         </Routes>
