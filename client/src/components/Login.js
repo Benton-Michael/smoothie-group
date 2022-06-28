@@ -28,7 +28,7 @@ const Login = (props) => {
         console.log("----------");
         console.log("IsLoggedIn", isLoggedIn);
         console.log("----------");
-        navigate("/new");
+        navigate("/all");
       })
       .catch((err) => {
         console.log("error in login", err.response.data.message);

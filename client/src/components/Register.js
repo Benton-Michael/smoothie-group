@@ -25,7 +25,7 @@ const Register = (props) => {
       .then((res) => {
         console.log("response", res.data);
         setIsLoggedIn(true);
-        navigate("/new");
+        navigate("/all");
       })
       .catch((err) => {
         console.log("Error in registration", err.response);

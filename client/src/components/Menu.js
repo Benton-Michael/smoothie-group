@@ -40,13 +40,13 @@ const Menu = (props) => {
         </h1>
       </div>
       <div>
-        {user ? (
+        {user && user ? (
           <div className="flex w-full mr-2 items-center">
             <p className="text-white text-lg mr-4">
               {" "}
               Welcome Back, {user.firstName}!
             </p>
-            <Link to={"/"} className="text-white">
+            <Link to={"/all"} className="text-white">
               Home
             </Link>
             <Link to={"/new"} className="ml-4 text-white">
