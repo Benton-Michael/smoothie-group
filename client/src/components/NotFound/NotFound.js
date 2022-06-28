@@ -3,9 +3,9 @@ import Image from './NotFound.css'
 
 const NotFound = () => {
     return (
-        <div className="main-area bg-dark">
+        <div className="main-area">
             <div className="image"></div>
-            <div className="bg-dark">
+            <div>
                 <p >Page Not Found</p>
                 <a href="https://storyset.com/web" target="_blank">Web illustrations by Storyset</a>
             </div>
