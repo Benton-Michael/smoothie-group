@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-area {
+    height: 500px;
+    color: rgb(66, 41, 41);
+}
+
+.image {
+    height: 500px;
+    width: 500px;
+    background-image: url('./404_robot_error.png');
+    background-repeat: no-repeat;
+    margin: auto;
+}
+
