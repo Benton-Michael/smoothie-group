@@ -7,6 +7,7 @@ import DeleteButton from "./DeleteButton";
 const AllSmoothies = (props) => {
   const { deleteHandler, smoothies } = props;
   const { user, setUser } = useState([]);
+  const {erros, setErrors } = useState({});
 
   useEffect(() => {
     const userToken = Cookies.get("userToken");
