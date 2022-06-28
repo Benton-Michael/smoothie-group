@@ -4,6 +4,7 @@ import Welcome from './components/Welcome';
 import CreateSip from './components/CreateSip';
 import NotFound from './components/NotFound/NotFound';
 import {useState} from 'react';
+import AllSmoothies from './components/AllSmoothies';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -14,6 +15,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Welcome setIsLoggedIn={setIsLoggedIn}/>} default />
+          <Route path="/all" element={<AllSmoothies/>} />
           <Route path='/new' element={<CreateSip/>} />
           <Route path='*' element={<NotFound/>} />
 

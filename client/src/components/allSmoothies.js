@@ -2,57 +2,86 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import DeleteButton from "./DeleteButton";
 
-const allSmoothies = (props) => {
+const AllSmoothies = (props) => {
+  const { deleteHandler, smoothies } = props;
+  const { user, setUser } = useState([]);
 
-    const { user, setUser } = useState({})
-    const { deleteHandler, smoothies } = props;
+  useEffect(() => {
+    const userToken = Cookies.get("userToken");
+    if (userToken) {
+      const user = jwtDecode(userToken);
+      setUser(user);
+    }
+  }, []);
 
-    useEffect(() => {
+//   return (
+    // <div>
+    //   <br />
 
-        const userToken = Cookies.get("userToken")
+    //   <h3>All Smoothies</h3>
+    //   <br />
 
-        if (userToken) {
-            const user = jwtDecode(userToken);
-            setUser(user);
-        }
-    }, []);
+    //   <table>
+    //     <thead>
+    //       <tr>
+    //         <th scope="col">
+    //           Quanitity:
+    //         </th>
 
+    //         <th scope="col">
+    //           Size:{" "}
+    //         </th>
 
-    return (
-        <div>
+    //         <th scope="col">
+    //           Receiving via method:{" "}
+    //         </th>
 
-            <h3>All Smoothies</h3>
+    //         <th scope="col">
+    //           {" "}
+    //           With fresh and tasty:{" "}
+    //         </th>
 
-            <table>
+    //         <th scope="col">
+    //           {" "}
+    //           Order Actions{" "}
+    //         </th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>
+    //       {smoothies.map((smoothie, index) => (
+    //         <tr key={index}>
+    //           <td>{smoothie.quantity}</td>
+    //           <td>{smoothie.size}</td>
+    //           <td>{smoothie.method}</td>
+    //           <td>
+    //             {smoothie.liquid} + {smoothie.fruits} + {smoothie.veggies} and{" "}
+    //             {smoothie.extras}{" "}
+    //           </td>
+    //           {user._id === smoothie.createdBy._id ? (
+    //             <td>
+    //               <Link to={`/view/${smoothie._id}`}>View </Link>
+    //               <span> | </span>
 
-                <thead>
-                    
-                    <tr>
-                        <th scope="col"className=""> Quanitity  </th>
+    //               <Link to={`/edit/${smoothie._id}`}>Edit</Link>
+    //               <span> | </span>
+    //               <DeleteButton
+    //                 id={smoothie._id}
+    //                 deleteHandler={deleteHandler}
+    //               />
+    //             </td>
+    //           ) : (
+    //             <td>
+    //               <Link to={`/view/${smoothie._id}`}>View</Link>
+    //             </td>
+    //           )}
+    //         </tr>
+    //       ))}
+    //     </tbody>
+    //   </table>
+    // </div>
+//   );
+};
 
-                        <th scope="col"className=""> Size  </th>
-
-                        <th scope="col"className=""> Delivering By:  </th>
-
-                        <th scope="col"className=""> With fresh and tasty: </th>
-
-                        <th scope="col"className=""> Order Actions </th>
-
-
-                    </tr>
-                
-                </thead>
-
-
-            </table>
-
-
-        </div>
-
-
-
-    )
-}
-
-export default allSmoothies
+export default AllSmoothies;
