@@ -35,6 +35,11 @@ const Menu = (props) => {
           SipSpace Smoothies
         </h1>
       </div>
+      
+      <div>
+        
+          <div className="flex w-full mr-2 items-center">
+              <div>
       <div>
         {user ? (
           <div className="flex w-full mr-2 items-center">
@@ -42,6 +47,11 @@ const Menu = (props) => {
               {" "}
               Welcome Back, {user.firstName}!
             </p>
+            <button onClick={handleLogout} className="ml-4 text-white">
+              Logout
+            </button>
+            </div>
+            ) : null}
             <Link to={"/"} className="text-white">
               Home
             </Link>
@@ -51,11 +61,10 @@ const Menu = (props) => {
             <Link to={"/account"} className="ml-4 text-white">
               Account
             </Link>
-            <button onClick={handleLogout} className="ml-4 text-white">
-              Logout
-            </button>
+            
           </div>
-        ) : null}
+      </div>
+            </div>
       </div>
     </div>
   );
