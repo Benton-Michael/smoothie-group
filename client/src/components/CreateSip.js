@@ -5,6 +5,7 @@ import "../index.css";
 
 const CreateSip = (props) => {
   const { allSmoothies, setAllSmoothies } = props;
+  const [name, setName] = useState("");
   const [method, setMethod] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(0);
@@ -12,66 +13,64 @@ const CreateSip = (props) => {
   const [fruits, setFruits] = useState([]);
   const [veggies, setVeggies] = useState([]);
   const [extras, setExtras] = useState([]);
-  const [fruitsObj, setFruitsObj] = useState({
-    tropicalFruit: false,
-    mixedBerry: false,
-    mango: false,
-    pomegranite: false,
-    acaiBerry: false,
-    blueberry: false,
-    banana: false,
-    raspberry: false,
-    pineapple: false,
-    orange: false
-  });
-  const [veggiesObj, setVeggiesObj] = useState({
-    kale: false,
-    swissChard: false,
-    avocado: false,
-    cucumber: false,
-    spinach: false,
-    mint: false,
-    winterSquash: false,
-    beets: false,
-    celery: false
-  });
-  const [extrasObj, setExtrasObj] = useState({
-    proteinPowderChoc: false,
-    proteinPowderVan: false,
-    chia: false,
-    aloe: false,
-    cinnamon: false,
-    cayenne: false,
-    flax: false,
-    gojiBerry: false,
-    hemp: false
-  });
+  // const [fruitsObj, setFruitsObj] = useState({
+  //   tropicalFruit: false,
+  //   mixedBerry: false,
+  //   mango: false,
+  //   pomegranite: false,
+  //   acaiBerry: false,
+  //   blueberry: false,
+  //   banana: false,
+  //   raspberry: false,
+  //   pineapple: false,
+  //   orange: false
+  // });
+  // const [veggiesObj, setVeggiesObj] = useState({
+  //   kale: false,
+  //   swissChard: false,
+  //   avocado: false,
+  //   cucumber: false,
+  //   spinach: false,
+  //   mint: false,
+  //   winterSquash: false,
+  //   beets: false,
+  //   celery: false
+  // });
+  // const [extrasObj, setExtrasObj] = useState({
+  //   proteinPowderChoc: false,
+  //   proteinPowderVan: false,
+  //   chia: false,
+  //   aloe: false,
+  //   cinnamon: false,
+  //   cayenne: false,
+  //   flax: false,
+  //   gojiBerry: false,
+  //   hemp: false
+  // });
   const [favorited, setFavorited] = useState(false);
-
-
   const navigate = useNavigate();
 
 
-  const [fruitsCheckedState, setFruitsCheckedStated] = useState(
-  new Array(fruits.length).fill(false)
-  );
-
-  const [isChecked, setIsChecked] = useState(false);
-  const handleAllFruit = (e) => {
-    setIsChecked(!isChecked);
-    setFruitsObj({...fruitsObj, [e.target.id]: !isChecked});
+  // const [fruitsCheckedState, setFruitsCheckedStated] = useState(
+  // new Array(fruits.length).fill(false)
+  // );
+  // const [isChecked, setIsChecked] = useState(false);
+  // const handleAllFruit = (e) => {
+  //   setIsChecked(!isChecked);
+  //   setFruitsObj({...fruitsObj, [e.target.id]: !isChecked});
     
-    // console.log('veggies', veggies);
-    // console.log('extras', extras);
-  };
-  console.log(isChecked);
-  console.log('fruits-Object-TEST', fruitsObj);
+  //   // console.log('veggies', veggies);
+  //   // console.log('extras', extras);
+  // };
+  // console.log(isChecked);
+  // console.log('fruits-Object-TEST', fruitsObj);
   // console.log(checkedState);
 
   const submitHandler = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8000/api/smoothie", {
+        name,
         method,
         size,
         quantity,
@@ -86,12 +85,13 @@ const CreateSip = (props) => {
         setAllSmoothies([...allSmoothies, res.data]);
         console.log("Added: ", res.data);
         //reset form fields
+        setName("");
         setMethod("");
         setSize("");
         setQuantity(0);
-        setFruits({});
-        setVeggies({});
-        setExtras({});
+        setFruits([]);
+        setVeggies([]);
+        setExtras([]);
         setFavorited(false);
         //navigate to home page after submission
         navigate("/");
@@ -105,28 +105,37 @@ const CreateSip = (props) => {
     console.log(e.target.value)
     if (!fruits.includes(e.target.value)){
       setFruits([...fruits, e.target.value]);
-    } 
+    } else if (fruits.includes(e.target.value)){
+      const tgtFruit = e.target.value;
+      const filterFruits = fruits.filter(_ => _ !==tgtFruit);
+      setFruits(filterFruits);
+    }
   }
   const vegHandler = (e) => {
     console.log(e.target.value)
     if (!veggies.includes(e.target.value)){
         setVeggies([...veggies, e.target.value]);
-    } 
+    } else if (veggies.includes(e.target.value)){
+      const tgtVeg = e.target.value;
+      const filterVegs = veggies.filter(_ => _ !== tgtVeg);
+      setVeggies(filterVegs);
+    }
   }
-    // console.log('fruits-test', fruits);
-    // console.log('veggies-test', veggies);
-    // console.log('extras-test', extras);
+
   const extraHandler = (e) => {
+    // let extrasArr = [];
     console.log(e.target.value)
     if (!extras.includes(e.target.value)){
         setExtras([...extras, e.target.value]);
     } else if (extras.includes(e.target.value)) {
-      const lastIndex = extras.length -1;
-
-      setExtras(extras.filter((e.target.value)));
+      const tgtExtra = e.target.value
+      // console.log('====removing etra', targetExtra)
+      const filterExtras = extras.filter(_ => _ !==tgtExtra)
+      // console.log('====filteredExtras', filterExtras)
+      setExtras(filterExtras)
+      // setExtras(extras.filter((e.target.value) ));
     }
   }
-
 
   console.log('---------testing array-------')
   console.log('fruits-array',fruits);
@@ -138,6 +147,18 @@ const CreateSip = (props) => {
     <div className="flex justify-center mt-4">
       <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8">
         <h3 className="text-2xl mb-4 text-center">Create your own favorite smoothie</h3>
+        <section className="flex justify-between items-center pb-2">
+          <label className="col-3" htmlFor="name">
+            Name:{" "}
+          </label>
+          <input
+            type="Text"
+            className="form-control"
+            value={name}
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </section>
         <section className="flex justify-between items-center pb-2">
           <label className="form-label col-3" htmlFor="method">
             Method:{" "}
@@ -206,11 +227,11 @@ const CreateSip = (props) => {
             <label className="form-label col-3" htmlFor="fruits">Fruits:{" "}</label>
             <div className="grid grid-cols-5">
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="tropicalFruit" value="tropicalFruit" checked={isChecked} onChange={handleAllFruit}/>
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="tropicalFruit" value="tropicalFruit" onChange={fruitHandler}/>
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="tropicalFruit">Tropical Fruit</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mixedBerry" value="mixedBerry" onChange={handleAllFruit} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mixedBerry" value="mixedBerry" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="mixedBerry">Mixed Berry</label>
                 </div>
                 <div className="form-check form-check-inline">
