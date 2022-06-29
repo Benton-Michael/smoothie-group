@@ -17,6 +17,12 @@ const GetAllSmoothies = () => {
       });
   }, []);
 
+  const addSmoothieToCart = e => {
+    axios.put("http://localhost:5001/api/add/cart")
+    .then(res => {
+      
+    })
+  }
   return (
     <div className="flex justify-center">
       <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -41,9 +47,12 @@ const GetAllSmoothies = () => {
             </ul>
           
           </div>
-          <Link to={`/details/`}>
+
+          <button onClick={addSmoothieToCart}>Add To Cart</button>
+
+          {/* <Link to={`/details`}>
             <span> Add Smoothie to Cart</span>
-            </Link>
+            </Link> */}
           </div>
         
         </div>
