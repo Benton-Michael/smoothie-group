@@ -35,10 +35,16 @@ const Menu = (props) => {
   return (
     <div className="dark:bg-green-800 w-[100%] h-20 justify-between flex drop-shadow-lg items-center">
       <div className="items-center ml-6 flex">
+        <img src="./logo.png" className="w-12"></img>
         <h1 className="text-white text-3xl text-center ml-4 mt-1">
           SipSpace Smoothies
         </h1>
       </div>
+      
+      <div>
+        
+          <div className="flex w-full mr-2 items-center">
+              <div>
       <div>
         {user && user ? (
           <div className="flex w-full mr-2 items-center">
@@ -46,6 +52,12 @@ const Menu = (props) => {
               {" "}
               Welcome Back, {user.firstName}!
             </p>
+            <button onClick={handleLogout} className="ml-4 text-white">
+              Logout
+            </button>
+            </div>
+            ) : null}
+            <Link to={"/"} className="text-white" />
             <Link to={"/all"} className="text-white">
               Home
             </Link>
@@ -55,11 +67,10 @@ const Menu = (props) => {
             <Link to={"/account"} className="ml-4 text-white">
               Account
             </Link>
-            <button onClick={handleLogout} className="ml-4 text-white">
-              Logout
-            </button>
+            
           </div>
-        ) : null}
+      </div>
+            </div>
       </div>
     </div>
   );
