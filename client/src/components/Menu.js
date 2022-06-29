@@ -35,6 +35,7 @@ const Menu = (props) => {
   return (
     <div className="dark:bg-green-800 w-[100%] h-20 justify-between flex drop-shadow-lg items-center">
       <div className="items-center ml-6 flex">
+        <img src="./logo.png" className="w-12"></img>
         <h1 className="text-white text-3xl text-center ml-4 mt-1">
           SipSpace Smoothies
         </h1>
@@ -56,7 +57,8 @@ const Menu = (props) => {
             </button>
             </div>
             ) : null}
-            <Link to={"/"} className="text-white"/>
+            <Link to={"/"} className="text-white">
+            <Link to={"/"} className="text-white" />
             <Link to={"/all"} className="text-white">
               Home
             </Link>
