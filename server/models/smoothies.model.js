@@ -130,13 +130,12 @@ const SmoothiesSchema = new mongoose.Schema(
 //       gojiBerry: { type: Boolean, required: false, default: false },
 //       hemp: { type: Boolean, required: false, default: false },
 //     },
-//     favorited: {type: Boolean, default:false},
   },
+  favorited: {type: Boolean, default:false},
   },
   {
     timestamps: true,
   },
- 
 );
 
 module.exports = mongoose.model("Smoothie", SmoothiesSchema);
