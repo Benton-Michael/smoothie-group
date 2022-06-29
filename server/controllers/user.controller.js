@@ -31,8 +31,8 @@ const register = async (req, res) => {
           email: newUser.email,
           firstName: newUser.firstName,
           lastName: newUser.lastName,
-          createdAt: userDoc.createdAt,
-          updatedAt: userDoc.updatedAt
+          createdAt: newUser.createdAt,
+          updatedAt: newUser.updatedAt,
         },
       });
   } catch (e) {
@@ -62,7 +62,7 @@ const login = async (req, res) => {
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             createdAt: userDoc.createdAt,
-            updatedAt: userDoc.updatedAt
+            updatedAt: userDoc.updatedAt,
           },
           SECRET
         );

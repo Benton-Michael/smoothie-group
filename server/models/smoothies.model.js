@@ -71,18 +71,15 @@ const SmoothiesSchema = new mongoose.Schema(
     },
 
     extras: {
-      type: String,
-      enum: [
-        "Protein Powder (chocolate)",
-        "Protein Powder (vanilla)",
-        "Chia",
-        "Aloe",
-        "Cinnamon",
-        "Cayenne",
-        "Flax",
-        "Goji Berry",
-        "Hemp",
-      ],
+      proteinPowderChoc: { type: Boolean, required: false, default: false },
+      proteinPowderVan: { type: Boolean, required: false, default: false },
+      chia: { type: Boolean, required: false, default: false },
+      aloe: { type: Boolean, required: false, default: false },
+      cinnamon: { type: Boolean, required: false, default: false },
+      cayenne: { type: Boolean, required: false, default: false },
+      flax: { type: Boolean, required: false, default: false },
+      gojiBerry: { type: Boolean, required: false, default: false },
+      hemp: { type: Boolean, required: false, default: false },
     },
     favorited: {type: Boolean, default:false}
   },

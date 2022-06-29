@@ -15,6 +15,10 @@ const Menu = (props) => {
     if (userToken) {
       const user = jwtDecode(userToken);
       setUser(user);
+      console.log("--------");
+      console.log(user);
+      console.log(isLoggedIn);
+      console.log("--------");
     }
   }, [isLoggedIn]);
 
@@ -41,7 +45,7 @@ const Menu = (props) => {
           <div className="flex w-full mr-2 items-center">
               <div>
       <div>
-        {user ? (
+        {user && user ? (
           <div className="flex w-full mr-2 items-center">
             <p className="text-white text-lg mr-4">
               {" "}
@@ -53,6 +57,7 @@ const Menu = (props) => {
             </div>
             ) : null}
             <Link to={"/"} className="text-white">
+            <Link to={"/all"} className="text-white">
               Home
             </Link>
             <Link to={"/new"} className="ml-4 text-white">
