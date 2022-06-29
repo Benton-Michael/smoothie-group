@@ -31,9 +31,9 @@ const Login = (props) => {
         navigate("/all");
       })
       .catch((err) => {
-        console.log("error in login", err.response.data.message);
-        setErrors(err.res.data.message);
-        console.log("attempt to set Errors", errors);
+        console.log("the one i want to see", err.response.data.message);
+        setErrors(err.response.data.message);
+        console.log("errors", errors);
       });
   };
 
