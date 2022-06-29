@@ -157,6 +157,16 @@ const getUserFavoritedSmoothies = (req, res) => {
     });
 };
 
+const addToCart = (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true}
+)
+    .then(updatedUser => res.json(updatedUser))
+    .catch(err => res.status(400).json(err));
+}
+
 module.exports = {
   register,
   login,
@@ -164,4 +174,5 @@ module.exports = {
   getLoggedInUser,
   updateUsersWithFavorites,
   getUserFavoritedSmoothies,
+  addToCart,
 };
