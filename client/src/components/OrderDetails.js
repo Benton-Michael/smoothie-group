@@ -3,25 +3,26 @@ import axios from 'axios';
 
 
 const OrderDetails = (props) => {
-    const [users, setUsers] = useState([])
+    const [cart, setCart] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5001/api')
+        axios.get('http://localhost:5001/api/users/cart')
             .then(res => {
                 console.log(res.data)
-                setUsers(res.data)
+                setCart(res.data)
             })
+            .catch(err => console.log(err))
     }, [])
 
     return (
         <div>
             <h2>Order Details:</h2>
             {
-                users.map((user, index) => {
+                cart.map((order, index) => {
                     return(
                         <div key={index}>
-                            <p>Method:  {user.method}</p>
-                            <p>Size:  {user.size}</p>
-                            <p>Quantity:  </p>
+                            <p>Method:  {order.method}</p>
+                            <p>Size:  {order.size}</p>
+                            <p>Quantity:  {order.quantity}</p>
                             <p>Extras:  </p>
                         </div>
                     )
