@@ -32,13 +32,13 @@ const Account = (props) => {
                     <div className="p-6 flex flex-col justify-start">
                         <h5 className="text-gray-900 text-xl font-medium mb-2">{user.firstName} {user.lastName}</h5>
                         <p className="text-gray-700 text-base mb-4">{user.email}</p>
-                        <p className="text-gray-600 text-xs">Last Updated <Moment format="MM/DD/YYYY" date={user.updatedAt} /></p>
+                        <p className="text-gray-600 text-xs border-t border-gray-300">Last Updated <Moment format="MM/DD/YYYY" date={user.updatedAt} /></p>
                         <p className="text-gray-600 text-xs">User Created <Moment format="MM/DD/YYYY" date={user.createdAt} /></p>
-                        <div className="py-3 px-6 border-t border-gray-300 text-gray-600">
-                        <button type="button" 
+                        <div className="py-3 px-6  text-gray-600">
+                        {/* <button type="button" 
                         className="dark:bg-green-800 hover:bg-slate-400 text-white py-2 px-2 rounded focus:outline-none focus:shadow-outline" >
                             Edit
-                        </button>
+                        </button> */}
                         </div>
                     </div>
                     
@@ -121,9 +121,7 @@ const Account = (props) => {
                         <div className="py-3 px-6 border-b border-gray-300">Favorites</div>
                         <div className="p-6">
                             <h5 className="text-gray-900 text-xl font-medium mb-2">Smoothies you've favorited</h5>
-                            
                         </div>
-                        
                     </div>
                 </div>
             </div>
