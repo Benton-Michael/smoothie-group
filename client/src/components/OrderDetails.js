@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-
+import {useParams} from "react-router-dom";
 
 const OrderDetails = (props) => {
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState([]);
+    const {id} = useParams();
     useEffect(() => {
-        axios.get('http://localhost:5001/api/users/cart')
-            .then(res => {
+        axios.get(`http://localhost:8000/api/${id}`)
+            .then( res => {
                 console.log(res.data)
-                setCart(res.data)
+                setCart(res.data.cart);
             })
-            .catch(err => console.log(err))
-    }, [])
+            .catch( err => console.log(err) )
+    }, [id])
 
     return (
         <div>
@@ -20,7 +21,7 @@ const OrderDetails = (props) => {
                 cart.map((order, index) => {
                     return(
                         <div key={index}>
-                            <p>Method:  {order.method}</p>
+                            <p>Method:  </p><p>{order.method}</p>
                             <p>Size:  {order.size}</p>
                             <p>Quantity:  {order.quantity}</p>
                             <p>Extras:  </p>
