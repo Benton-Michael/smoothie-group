@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const SmoothiesSchema = new mongoose.Schema(
   {
+    cart: [
+      {type: Object,}
+    ],
     name: {
       type: String,
       required: [true, "A custom Smoothie Name is required"],
