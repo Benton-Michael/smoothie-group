@@ -2,25 +2,25 @@ const mongoose = require("mongoose");
 
 const SmoothiesSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: [true, "A custom name is required"],
+      minlength: [
+        3,
+        "The name of your smoothie must be at least 3 characters.",
+      ],
+    },
     method: {
       type: String,
       required: [true, "Please select an option"],
       // drop-down options
-      enum: [
-        "Pick-up", 
-        "Delivery",
-      ],
+      enum: ["Pick-up", "Delivery"],
     },
 
     size: {
       type: String,
       required: [true, "Please select a size for your smoothie!"],
-      enum: [
-      "Small",
-      "Medium", 
-      "Large", 
-      "SuperSip",
-      ],
+      enum: ["Small", "Medium", "Large", "SuperSip"],
     },
 
     quantity: {
@@ -56,13 +56,13 @@ const SmoothiesSchema = new mongoose.Schema(
       raspberry: { type: Boolean, required: false, default: false },
       Pineapple: { type: Boolean, required: false, default: false },
       Orange: { type: Boolean, required: false, default: false },
-  },
+    },
 
-    veggies: { 
+    veggies: {
       kale: { type: Boolean, required: false, default: false },
       swissChard: { type: Boolean, required: false, default: false },
       avocado: { type: Boolean, required: false, default: false },
-      cucumber:{ type: Boolean, required: false, default: false },
+      cucumber: { type: Boolean, required: false, default: false },
       spinach: { type: Boolean, required: false, default: false },
       mint: { type: Boolean, required: false, default: false },
       winterSquash: { type: Boolean, required: false, default: false },
@@ -81,33 +81,31 @@ const SmoothiesSchema = new mongoose.Schema(
       gojiBerry: { type: Boolean, required: false, default: false },
       hemp: { type: Boolean, required: false, default: false },
     },
-    favorited: {type: Boolean, default:false},
-    
+    favorited: { type: Boolean, default: false },
   },
   {
     timestamps: true,
   }
- 
 );
-SmoothiesSchema.method('FruitsList', function(){
+SmoothiesSchema.method("FruitsList", function () {
   var list = [];
-  var obj = SmoothiesSchema.fruits
-  for (key in Object.keys(obj)){
-    if(obj[key]){
+  var obj = SmoothiesSchema.fruits;
+  for (key in Object.keys(obj)) {
+    if (obj[key]) {
       list.push(key);
     }
   }
   return list;
-})
-SmoothiesSchema.method('VeggiesList', function(){
+});
+SmoothiesSchema.method("VeggiesList", function () {
   var list = [];
-  var obj = SmoothiesSchema.veggies
-  for (key in Object.keys(obj)){
-    if(obj[key]){
+  var obj = SmoothiesSchema.veggies;
+  for (key in Object.keys(obj)) {
+    if (obj[key]) {
       list.push(key);
     }
   }
   console.log(list);
   return list;
-})
+});
 module.exports = mongoose.model("Smoothie", SmoothiesSchema);

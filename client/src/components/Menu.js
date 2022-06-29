@@ -35,42 +35,40 @@ const Menu = (props) => {
   return (
     <div className="dark:bg-green-800 w-[100%] h-20 justify-between flex drop-shadow-lg items-center">
       <div className="items-center ml-6 flex">
-        <img src="./logo.png" className="w-12"></img>
+        <img src="./logo.png" className="w-12" alt="smoothie-logo"></img>
         <h1 className="text-white text-3xl text-center ml-4 mt-1">
           SipSpace Smoothies
         </h1>
       </div>
-      
+
       <div>
-        
-          <div className="flex w-full mr-2 items-center">
-              <div>
-      <div>
-        {user && user ? (
-          <div className="flex w-full mr-2 items-center">
-            <p className="text-white text-lg mr-4">
-              {" "}
-              Welcome Back, {user.firstName}!
-            </p>
-            <button onClick={handleLogout} className="ml-4 text-white">
-              Logout
-            </button>
+        <div className="flex w-full mr-2 items-center">
+          <div>
+            <div>
+              {user && user ? (
+                <div className="flex w-full mr-2 items-center">
+                  <p className="text-white text-lg mr-4">
+                    {" "}
+                    Welcome Back, {user.firstName}!
+                  </p>
+                  <button onClick={handleLogout} className="ml-4 text-white">
+                    Logout
+                  </button>
+                </div>
+              ) : null}
+              <Link to={"/"} className="text-white" />
+              <Link to={"/all"} className="text-white">
+                Home
+              </Link>
+              <Link to={"/new"} className="ml-4 text-white">
+                Order
+              </Link>
+              <Link to={"/account"} className="ml-4 text-white">
+                Account
+              </Link>
             </div>
-            ) : null}
-            <Link to={"/"} className="text-white" />
-            <Link to={"/all"} className="text-white">
-              Home
-            </Link>
-            <Link to={"/new"} className="ml-4 text-white">
-              Order
-            </Link>
-            <Link to={"/account"} className="ml-4 text-white">
-              Account
-            </Link>
-            
           </div>
-      </div>
-            </div>
+        </div>
       </div>
     </div>
   );
