@@ -26,8 +26,11 @@ const UserSchema = new mongoose.Schema(
     favoritedSmoothies: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Smoothie" },
     ],
-    usersOrders: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Smoothie"}
+    // usersOrders: [
+    //   { type: mongoose.Schema.Types.ObjectId, ref: "Smoothie"}
+    // ],
+    cart: [
+      {type: Object,}
     ],
   },
   {
