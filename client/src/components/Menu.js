@@ -56,7 +56,7 @@ const Menu = (props) => {
             </button>
             </div>
             ) : null}
-            <Link to={"/"} className="text-white">
+            <Link to={"/"} className="text-white"/>
             <Link to={"/all"} className="text-white">
               Home
             </Link>
