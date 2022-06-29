@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
-const CreateSip = (props) => {
-  const { allSmoothies, setAllSmoothies } = props;
+const CreateSip = () => {
+  const [smoothies, setSmoothies] = useState([]);
   const [name, setName] = useState("");
   const [method, setMethod] = useState("");
   const [size, setSize] = useState("");
@@ -13,6 +13,20 @@ const CreateSip = (props) => {
   const [fruits, setFruits] = useState([]);
   const [veggies, setVeggies] = useState([]);
   const [extras, setExtras] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:5001/api/smoothies")
+    .then((res) => {
+        setSmoothies(res.data);
+    })
+    .catch((err) => console.log('Error getting smoothies', err));
+}, []);
+
+
+
+  const [favorited, setFavorited] = useState(false);
+  
   // const [fruitsObj, setFruitsObj] = useState({
   //   tropicalFruit: false,
   //   mixedBerry: false,
@@ -47,10 +61,7 @@ const CreateSip = (props) => {
   //   gojiBerry: false,
   //   hemp: false
   // });
-  const [favorited, setFavorited] = useState(false);
-  const navigate = useNavigate();
-
-
+  
   // const [fruitsCheckedState, setFruitsCheckedStated] = useState(
   // new Array(fruits.length).fill(false)
   // );
@@ -69,7 +80,7 @@ const CreateSip = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/smoothie", {
+      .post("http://localhost:5001/api/smoothie", {
         name,
         method,
         size,
@@ -78,11 +89,12 @@ const CreateSip = (props) => {
         fruits,
         veggies,
         extras,
-        favorited,
+        favorited
       })
       .then((res) => {
         //add smoothie to smoothie list
-        setAllSmoothies([...allSmoothies, res.data]);
+        console.log("Added: ", res.data);
+        setSmoothies([...smoothies, res.data]);
         console.log("Added: ", res.data);
         //reset form fields
         setName("");
@@ -94,15 +106,16 @@ const CreateSip = (props) => {
         setExtras([]);
         setFavorited(false);
         //navigate to home page after submission
-        navigate("/");
+        navigate("/all");
       })
       .catch((err) => {
         console.log("Error", err);
       });
   };
+  console.log('all smoothies',smoothies);
 
   const fruitHandler = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (!fruits.includes(e.target.value)){
       setFruits([...fruits, e.target.value]);
     } else if (fruits.includes(e.target.value)){
@@ -112,7 +125,7 @@ const CreateSip = (props) => {
     }
   }
   const vegHandler = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (!veggies.includes(e.target.value)){
         setVeggies([...veggies, e.target.value]);
     } else if (veggies.includes(e.target.value)){
@@ -121,23 +134,18 @@ const CreateSip = (props) => {
       setVeggies(filterVegs);
     }
   }
-
   const extraHandler = (e) => {
-    // let extrasArr = [];
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (!extras.includes(e.target.value)){
         setExtras([...extras, e.target.value]);
     } else if (extras.includes(e.target.value)) {
-      const tgtExtra = e.target.value
-      // console.log('====removing etra', targetExtra)
-      const filterExtras = extras.filter(_ => _ !==tgtExtra)
-      // console.log('====filteredExtras', filterExtras)
-      setExtras(filterExtras)
-      // setExtras(extras.filter((e.target.value) ));
+      const tgtExtra = e.target.value;
+      const filterExtras = extras.filter(_ => _ !==tgtExtra);
+      setExtras(filterExtras);
     }
   }
 
-  console.log('---------testing array-------')
+  console.log('---------testing array states-------')
   console.log('fruits-array',fruits);
   console.log('veggies-array', veggies);
   console.log('extras-array', extras);
@@ -146,13 +154,14 @@ const CreateSip = (props) => {
   return (
     <div className="flex justify-center mt-4">
       <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8">
-        <h3 className="text-2xl mb-4 text-center">Create your own favorite smoothie</h3>
+        <h3 className="text-2xl mb-4 text-center">Create your own smoothie</h3>
         <section className="flex justify-between items-center pb-2">
           <label className="col-3" htmlFor="name">
             Name:{" "}
           </label>
           <input
             type="Text"
+            id="name"
             className="form-control"
             value={name}
             name="name"
@@ -170,6 +179,7 @@ const CreateSip = (props) => {
             className="form-control"
             onChange={(e) => setMethod(e.target.value)}
           >
+            <option hidden value="">Select Method</option>
             <option value="Pick-up">Pick-up</option>
             <option value="Delivery">Delivery</option>
           </select>
@@ -185,6 +195,7 @@ const CreateSip = (props) => {
             className="form-control"
             onChange={(e) => setSize(e.target.value)}
           >
+            <option hidden value="">Select Size</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -200,6 +211,7 @@ const CreateSip = (props) => {
             className="form-control"
             value={quantity}
             name="quantity"
+            id="quantity"
             onChange={(e) => setQuantity(e.target.value)}
           />
         </section>
@@ -215,6 +227,7 @@ const CreateSip = (props) => {
             className="form-control"
             onChange={(e) => setLiquid(e.target.value)}
           >
+            <option hidden value="">Select Liquid</option>
             <option value="Fruit Juice">Fruit Juice</option>
             <option value="Soy Milk">Soy Milk</option>
             <option value="Milk">Milk</option>
@@ -352,7 +365,7 @@ const CreateSip = (props) => {
                 </div>
             </div>
         </section>
-        <input type="submit" value="Create" className="btn btn-primary mt-3" />
+        <input type="submit" value="Create" className="dark:bg-green-800 hover:bg-slate-400 text-white py-2 px-2 mt-4  rounded focus:outline-none focus:shadow-outline" />
       </form>
     </div>
   );

@@ -4,18 +4,25 @@ import { Link } from "react-router-dom";
 
 const GetAllSmoothies = () => {
   const [smoothies, setSmoothies] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5001/api/smoothies")
       .then((res) => {
-        console.log("Issue Setting the Smoothies", res.data);
         setSmoothies(res.data);
+        console.log("Setting", res.data)
       })
       .catch((err) => {
         console.log("error in retreiving all smoothies", err);
       });
   }, []);
 
+  const addSmoothieToCart = e => {
+    axios.put("http://localhost:5001/api/add/cart")
+    .then(res => {
+      
+    })
+  }
   return (
     <div className="flex justify-center">
       <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -40,9 +47,12 @@ const GetAllSmoothies = () => {
             </ul>
           
           </div>
-          <Link to={`/details/`}>
+
+          <button onClick={addSmoothieToCart}>Add To Cart</button>
+
+          {/* <Link to={`/details`}>
             <span> Add Smoothie to Cart</span>
-            </Link>
+            </Link> */}
           </div>
         
         </div>

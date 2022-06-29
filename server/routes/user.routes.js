@@ -9,6 +9,8 @@ module.exports = (app) => {
     "/api/users/favorite/smoothies",
     UserController.updateUsersWithFavorites
   );
-  app.put("/api/users/cart", UserController.addToCart);
+  
+  app.get('/api', UserController.getAllUsers);
+  app.put("/api/add/cart", UserController.addToCart);
   app.get("/api/users/favorites", UserController.getUserFavoritedSmoothies);
 };

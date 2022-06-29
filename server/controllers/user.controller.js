@@ -142,7 +142,7 @@ const getUserFavoritedSmoothies = (req, res) => {
   User.findById(user._id)
     .populate(
       "favoritedSmoothies",
-      "_id method size liquid quantity fruits veggies extras"
+      "_id method size liquid quantity fruits veggies extras name"
     )
     .then((user) => {
       console.log("Success!");
@@ -156,17 +156,29 @@ const getUserFavoritedSmoothies = (req, res) => {
       });
     });
 };
-
 const addToCart = (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.params.id },
-    req.body,
-    { new: true}
-)
-    .then(updatedUser => res.json(updatedUser))
-    .catch(err => res.status(400).json(err));
-}
+  const user = jwt.verify(req.cookies.userToken, SECRET);
 
+  console.log("=====add to cart", req.body.smoothieId)
+  User.findOneAndUpdate(
+    { _id: user._id },
+    { "$push": { "cart": req.body.smoothieId } },
+    { new: true},
+  )
+  .populate(
+    "cart",
+    "_id method size liquid quantity fruits veggies extras name"
+  ).then((user) => res.json(user))
+  .catch(err => res.status(400).json(err));
+};
+
+const getAllUsers = (req, res) => {
+  User.find({})
+      .then(allUsers => res.json(allUsers))
+      .catch((err) => {
+          res.json({ message: 'Something went wrong', error: err })
+      });
+};
 module.exports = {
   register,
   login,
@@ -175,4 +187,5 @@ module.exports = {
   updateUsersWithFavorites,
   getUserFavoritedSmoothies,
   addToCart,
+  getAllUsers,
 };
