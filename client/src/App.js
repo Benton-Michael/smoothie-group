@@ -25,6 +25,7 @@ function App() {
         <Route path="/new" element={<CreateSip />} />
         <Route path="/account" element={<Account />} />
         <Route path="/details" element={<OrderDetails />}/>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
