@@ -9,4 +9,5 @@ module.exports = (app) => {
   app.get("/api/smoothie/_id:", smoothieController.updateSmoothie);
   app.get("/api/smoothies", smoothieController.getAllSmoothies);
   app.get("/api/smoothie/:id", smoothieController.getOneSmoothie);
+  app.delete("/api/smoothie/:id", smoothieController.deleteSmoothie);
 };
