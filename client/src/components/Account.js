@@ -35,10 +35,10 @@ const Account = (props) => {
                         <p className="text-gray-600 text-xs border-t border-gray-300">Last Updated <Moment format="MM/DD/YYYY" date={user.updatedAt} /></p>
                         <p className="text-gray-600 text-xs">User Created <Moment format="MM/DD/YYYY" date={user.createdAt} /></p>
                         <div className="py-3 px-6  text-gray-600">
-                        <button type="button" 
+                        {/* <button type="button" 
                         className="dark:bg-green-800 hover:bg-slate-400 text-white py-2 px-2 rounded focus:outline-none focus:shadow-outline" >
                             Edit
-                        </button>
+                        </button> */}
                         </div>
                     </div>
                     
