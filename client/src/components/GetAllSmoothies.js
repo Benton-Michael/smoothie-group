@@ -52,56 +52,58 @@ const GetAllSmoothies = (props) => {
   };
   return (
     <div className="text-center">
-      <h1 className="py-3 px-6 border-b border-gray-300 text-xl font-medium">
+      <h1 className="py-3 px-6 border-b border-gray-300 text-2xl font-medium">
         All Smoothies
       </h1>
-      <div className="flex justify-center rounded-lg m-4 shadow-lg bg-white text-center grid grid-cols-2">
-        {smoothies.map((smoothie, index) => (
-          <div
-            key={index}
-            className="p-2 mb-4 mx-4 block rounded-lg shadow-lg bg-white text-center w-96"
-          >
-            <h5 className="text-gray-900 text-xl font-medium mb-2">
-              {smoothie.name}
-            </h5>
-            <div>
+      <div className="grid ">
+        <div className="justify-center rounded-lg m-4 shadow-lg bg-white text-center grid grid-cols-3 place-items-center">
+          {smoothies.map((smoothie, index) => (
+            <div
+              key={index}
+              className="p-2 mb-4 mx-4 block rounded-lg shadow-lg bg-white text-center w-96 ring-2 ring-gray-500 mt-4"
+            >
+              <h5 className="text-gray-900 text-xl font-medium mb-2">
+                {smoothie.name}
+              </h5>
               <div>
-                <ul className="mb-2 p-3">
-                  <li>Size: {smoothie.size}</li>
-                  <li>Base: {smoothie.liquid}</li>
-                  <hr />
-                  <li>
-                    <h5 className="font-medium">Fruits:</h5>
-                    {smoothie.fruits.map((fruit, i) => (
-                      <p>{fruit}</p>
-                    ))}
-                  </li>
-                  <hr />
-                  <li>
-                    <h5 className="font-medium">Veggies:</h5>
-                    {smoothie.veggies.map((veg, i) => (
-                      <p>{veg}</p>
-                    ))}
-                  </li>
-                  <hr />
-                  <li>
-                    <h5 className="font-medium">Extras:</h5>
-                    {smoothie.extras.map((ex, i) => (
-                      <p>{ex}</p>
-                    ))}
-                  </li>
-                  <hr />
-                </ul>
+                <div>
+                  <ul className="mb-2 p-3">
+                    <li>Size: {smoothie.size}</li>
+                    <li>Base: {smoothie.liquid}</li>
+                    <hr />
+                    <li>
+                      <h5 className="font-medium">Fruits:</h5>
+                      {smoothie.fruits.map((fruit, i) => (
+                        <p>{fruit}</p>
+                      ))}
+                    </li>
+                    <hr />
+                    <li>
+                      <h5 className="font-medium">Veggies:</h5>
+                      {smoothie.veggies.map((veg, i) => (
+                        <p>{veg}</p>
+                      ))}
+                    </li>
+                    <hr />
+                    <li>
+                      <h5 className="font-medium">Extras:</h5>
+                      {smoothie.extras.map((ex, i) => (
+                        <p>{ex}</p>
+                      ))}
+                    </li>
+                    <hr />
+                  </ul>
+                </div>
+                <button
+                  onClick={addSmoothieToCart}
+                  className="dark:bg-green-800 hover:bg-slate-400 text-white py-1 px-1 rounded"
+                >
+                  Add To Cart
+                </button>
               </div>
-              <button
-                onClick={addSmoothieToCart}
-                className="dark:bg-green-800 hover:bg-slate-400 text-white py-1 px-1 rounded"
-              >
-                Add To Cart
-              </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
