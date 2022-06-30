@@ -5,7 +5,7 @@
 
 @layer base {
   html {
-    @apply w-[100%];
+    @apply w-[100%] bg-gray-200;
   }
   label {
     @apply block text-gray-700 text-sm mb-2
