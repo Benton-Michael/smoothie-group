@@ -7,10 +7,9 @@ module.exports = (app) => {
   app.get("/api/users", UserController.getLoggedInUser);
   app.put(
     "/api/users/favorite/smoothies",
-    UserController.updateUsersWithFavorites
+    UserController.updateUsersWithOrders
   );
-  
-  app.get('/api', UserController.getAllUsers);
-  app.put('/api/add/cart/:id', UserController.addToCart);
-  app.get("/api/users/favorites", UserController.getUserFavoritedSmoothies);
+  app.get('/api/user/cart', UserController.getOneUserCart);
+  app.put('/api/add/cart', UserController.addToCart);
+  app.get("/api/users/favorites", UserController.getUserOrderedSmoothies);
 };
