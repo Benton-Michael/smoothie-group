@@ -108,24 +108,24 @@ const getLoggedInUser = async (req, res) => {
   }
 };
 
-const updateUsersWithFavorites = (req, res) => {
+const updateUsersWithOrders = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
   User.findByIdAndUpdate(
     { _id: user._id },
-    { $push: { favoritedSmoothies: [req.body.smoothieId] } },
+    { $push: { orderedSmoothies: [req.body.smoothieId] } },
     {
       new: true,
       runValidators: true,
     }
   )
     .populate(
-      "favoritedSmoothies",
+      "orderedSmoothies",
       "_id method size liquid quantity fruits veggies extras"
     )
     .then((user) => {
       Smoothie.findByIdAndUpdate(
         { _id: req.body.smoothieId },
-        { favorited: true }
+        { ordered: true }
       ).then((user) => {
         res.json(user);
       });
@@ -133,17 +133,17 @@ const updateUsersWithFavorites = (req, res) => {
     .catch((err) => {
       console.log("error message", err);
       res.status(400).json({
-        message: "Something went wrong favoriting a smoothie!",
+        message: "Something went wrong ordered a smoothie!",
         error: err,
       });
     });
 };
 
-const getUserFavoritedSmoothies = (req, res) => {
+const getUserOrderedSmoothies = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
   User.findById(user._id)
     .populate(
-      "favoritedSmoothies",
+      "orderedSmoothies",
       "_id method size liquid quantity fruits veggies extras name"
     )
     .then((user) => {
@@ -153,7 +153,7 @@ const getUserFavoritedSmoothies = (req, res) => {
     .catch((err) => {
       console.log("error message", err);
       res.status(400).json({
-        message: "Something went wrong finding favorited smoothies",
+        message: "Something went wrong finding ordered smoothies",
         error: err,
       });
     });
@@ -186,8 +186,8 @@ module.exports = {
   login,
   logout,
   getLoggedInUser,
-  updateUsersWithFavorites,
-  getUserFavoritedSmoothies,
+  updateUsersWithOrders,
+  getUserOrderedSmoothies,
   addToCart,
   getAllUsers,
 };
