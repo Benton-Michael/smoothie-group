@@ -174,16 +174,10 @@ const addToCart = (req, res) => {
   .catch(err => res.status(400).json(err));
 };
 
-const getAllUsers = (req, res) => {
-  User.find({})
-      .then(allUsers => res.json(allUsers))
-      .catch((err) => {
-          res.json({ message: 'Something went wrong', error: err })
-      });
-};
-
 const getOneUserCart = (req, res) => {
-  User.findOne({ _id: req.params.id })
+  const user = jwt.verify(req.cookies.userToken, SECRET);
+  User.findById(user._id)
+  .populate("cart", "_id name size quantity method extras fruits veggies createdAt")
       .then(oneUser => res.json(oneUser))
       .catch((err) => {
           res.json({ message: 'Something went wrong', error: err })
