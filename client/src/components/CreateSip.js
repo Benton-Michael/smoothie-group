@@ -112,7 +112,7 @@ const CreateSip = () => {
       .catch((err) => {
         console.log("Error", err);
         console.log('full error', err.response.data.error.errors);
-        setErrors(err.response.data.errors);
+        setErrors(err.response.data.error.errors);
       });
   };
   console.log('all smoothies',smoothies);
@@ -173,8 +173,9 @@ const CreateSip = () => {
             placeholder="Input Smoothie Name"
             onChange={(e) => setName(e.target.value)}
           />
-          {/* {errors.error.name && <p>{errors.error.name.message}</p>} */}
+          
         </section>
+        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         <section className="flex justify-between items-center pb-2">
           <label className="form-label col-3" htmlFor="method">
             Method:{" "}
@@ -191,6 +192,7 @@ const CreateSip = () => {
             <option value="Delivery">Delivery</option>
           </select>
         </section>
+        {errors.method && <p className="text-red-500">{errors.method.message}</p>}
         <section className="flex justify-between items-center pb-2">
           <label className="col-3" htmlFor="size">
             Size:{" "}
@@ -209,6 +211,7 @@ const CreateSip = () => {
             <option value="SuperSip">SuperSip</option>
           </select>
         </section>
+        {errors.size && <p className="text-red-500">{errors.size.message}</p>}
         <section className="flex justify-between items-center pb-2">
           <label className="col-3" htmlFor="quantity">
             Qty:{" "}
@@ -222,6 +225,7 @@ const CreateSip = () => {
             onChange={(e) => setQuantity(e.target.value)}
           />
         </section>
+        {errors.quantity && <p className="text-red-500">{errors.quantity.message}</p>}
         <hr className="my-3"/>
         <section className="flex justify-between items-center pb-2">
           <label className="form-label col-3" htmlFor="liquid">
@@ -243,6 +247,7 @@ const CreateSip = () => {
             <option value="Ice-Cream">Ice-Cream</option>
           </select>
         </section>
+        {errors.liquid && <p className="text-red-500">{errors.liquid.message}</p>}
         <section>
             <label className="form-label col-3" htmlFor="fruits">Fruits:{" "}</label>
             <div className="grid grid-cols-5">
