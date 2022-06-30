@@ -4,7 +4,7 @@ const SmoothiesSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "A custom Smoothie Name is required"],
+      required: [true, "A Smoothie Name is required"],
       minlength: [
         3,
         "The name of your smoothie must be at least 3 characters.",
