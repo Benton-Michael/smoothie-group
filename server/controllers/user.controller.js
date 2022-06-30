@@ -113,8 +113,8 @@ const getLoggedInUser = async (req, res) => {
 const updateUsersWithOrders = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
   User.findByIdAndUpdate(
-    { _id: user._id },
-    { $push: { orderedSmoothies: [req.body.smoothieId] } },
+    { _id: user.cart._id },
+    { $push: { orderedSmoothies: req.body.cart } },
     {
       new: true,
       runValidators: true,
@@ -128,7 +128,11 @@ const updateUsersWithOrders = (req, res) => {
       Smoothie.findByIdAndUpdate(
         { _id: req.body.smoothieId },
         { ordered: true }
-      ).then((user) => {
+
+      )
+      // console.log(user);
+      .then((user) => {
+        console.log(user);
         res.json(user);
       });
     })
@@ -162,7 +166,6 @@ const getUserOrderedSmoothies = (req, res) => {
 };
 const addToCart = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
-
   console.log("=====add to cart", req.body)
   User.findOneAndUpdate(
     { _id: user._id },
@@ -176,6 +179,23 @@ const addToCart = (req, res) => {
   .catch(err => res.status(400).json(err));
 };
 
+
+const deleteOneFromCart = (req, res) => {
+  const user = jwt.verify(req.cookies.userToken, SECRET);
+  console.log("=====Delete to cart", req.body)
+  User.findOneAndUpdate(
+    { _id: user._id },
+    { "$pull": { "cart": req.body.smoothie } },
+    { new: true},
+  )
+  // .populate(
+  //   "cart",
+  //   "_id method size liquid quantity fruits veggies extras name"
+  // )
+  .then((user) => res.json(user))
+  .catch(err => res.status(400).json(err));
+};
+
 const getOneUserCart = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
   User.findById(user._id)
@@ -185,6 +205,7 @@ const getOneUserCart = (req, res) => {
           res.json({ message: 'Something went wrong', error: err })
       });
 };
+
 module.exports = {
   register,
   login,
@@ -194,4 +215,5 @@ module.exports = {
   getUserOrderedSmoothies,
   addToCart,
   getOneUserCart,
+  deleteOneFromCart,
 };

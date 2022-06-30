@@ -123,7 +123,7 @@ const SmoothiesSchema = new mongoose.Schema(
 //     },
   },
   favorited: {type: Boolean, default:false},
-  ordered: {type: Boolean, default:false},
+  ordered: [{type: Boolean, default:false}],
   },
   {
     timestamps: true,
