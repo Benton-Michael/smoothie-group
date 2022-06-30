@@ -4,32 +4,23 @@ const SmoothiesSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "A custom Smoothie Name is required"],
+      required: [true, "A Smoothie Name is required"],
       minlength: [
         3,
         "The name of your smoothie must be at least 3 characters.",
       ],
     },
-
     method: {
       type: String,
       required: [true, "Please select an option"],
       // drop-down options
-      enum: [
-        "Pick-up", 
-        "Delivery",
-      ],
+      enum: ["Pick-up", "Delivery"],
     },
 
     size: {
       type: String,
       required: [true, "Please select a size for your smoothie!"],
-      enum: [
-      "Small",
-      "Medium", 
-      "Large", 
-      "SuperSip",
-      ],
+      enum: ["Small", "Medium", "Large", "SuperSip"],
     },
 
     quantity: {
