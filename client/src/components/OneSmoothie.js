@@ -38,7 +38,7 @@ const OneSmoothie = (props) => {
         <h1 className="text-xl font-bold mb-2 border-b-2">{smoothie.name}</h1>
         <p>
           <span className="font-medium pb-2">Method:</span>
-           {smoothie.method}
+          {smoothie.method}
         </p>
         <p>
           <span className="font-medium pb-2">Size:</span> {smoothie.size}
@@ -47,24 +47,24 @@ const OneSmoothie = (props) => {
           <div>
             <p>
               <span className="font-medium pb-2">Quantity:</span>
-               {smoothie.quantity}
+              {smoothie.quantity}
             </p>
             <p>
               <span className="font-medium pb-2">Liquid:</span>
-               {smoothie.liquid}
+              {smoothie.liquid}
             </p>
             <p className="border-t-2 font-medium">Fruits:</p>
-            {smoothie.fruits.map((fruit, i) => (
+            {smoothie.fruits?.map((fruit) => (
               <p>{fruit}</p>
             ))}
             <p className="border-t-2 font-medium">Veggies:</p>
-            {smoothie.veggies.map((veggie) => (
+            {smoothie.veggies?.map((veggie) => (
               <p>{veggie}</p>
             ))}
-            <p className="border-t-2 pb-2">
-              <span className="font-medium pb-2">Extras:</span>
-               {smoothie.extras}
-            </p>
+            <p className="border-t-2 font-medium">Extras:</p>
+            {smoothie.extras?.map((extra) => (
+              <p>{extra}</p>
+            ))}
           </div>
           <button
             onClick={addSmoothieToCart}
