@@ -21,32 +21,28 @@ const GetAllSmoothies = () => {
       <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
         <div className="py-3 px-6 border-b border-gray-300">All Smoothies</div>
         {smoothies.map((smoothie, index) => (
-        <div className="p-6 mb-4">
-          
-          <h5 className="text-gray-900 text-xl font-medium mb-2">
-          {smoothie.name}
-          </h5>
-          <div>
+          <div className="p-6 mb-4">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">
+              {smoothie.name}
+            </h5>
             <div>
-         
-            <ul className="mb-2 p-3" key={index}>
-              <li>Quantity: {smoothie.quanity}</li>
-              <li>Size: {smoothie.size}</li>
-              {/* <li></li> */}
-              <li>{smoothie.liquid}</li>
-              <li>{smoothie.fruits}</li>
-              <li>{smoothie.veggies}</li>
-              <li>{smoothie.extras}</li>
-            </ul>
-          
+              <div>
+                <ul className="mb-2 p-3" key={index}>
+                  <li>Quantity: {smoothie.quanity}</li>
+                  <li>Size: {smoothie.size}</li>
+                  {/* <li></li> */}
+                  <li>{smoothie.liquid}</li>
+                  <li>{smoothie.fruits}</li>
+                  <li>{smoothie.veggies}</li>
+                  <li>{smoothie.extras}</li>
+                </ul>
+              </div>
+              <Link to={`/details/`}>
+                <span> Add Smoothie to Cart</span>
+              </Link>
+            </div>
           </div>
-          <Link to={`/details/`}>
-            <span> Add Smoothie to Cart</span>
-            </Link>
-          </div>
-        
-        </div>
-  ))}
+        ))}
       </div>
     </div>
   );
