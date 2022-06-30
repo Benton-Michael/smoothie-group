@@ -6,10 +6,10 @@ module.exports = (app) => {
   app.post("/logout", UserController.logout);
   app.get("/api/users", UserController.getLoggedInUser);
   app.put(
-    "/api/users/favorite/smoothies",
+    "/api/users/orders/smoothies",
     UserController.updateUsersWithOrders
   );
   app.get('/api/user/cart', UserController.getOneUserCart);
   app.put('/api/add/cart', UserController.addToCart);
-  app.get("/api/users/favorites", UserController.getUserOrderedSmoothies);
+  app.get("/api/users/orders", UserController.getUserOrderedSmoothies);
 };
