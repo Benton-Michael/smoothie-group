@@ -191,6 +191,5 @@ module.exports = {
   updateUsersWithFavorites,
   getUserFavoritedSmoothies,
   addToCart,
-  getAllUsers,
   getOneUserCart,
 };
