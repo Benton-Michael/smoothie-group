@@ -13,6 +13,7 @@ const CreateSip = () => {
   const [fruits, setFruits] = useState([]);
   const [veggies, setVeggies] = useState([]);
   const [extras, setExtras] = useState([]);
+  const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,9 +111,12 @@ const CreateSip = () => {
       })
       .catch((err) => {
         console.log("Error", err);
+        console.log('full error', err.response.data.error.errors);
+        setErrors(err.response.data.errors);
       });
   };
   console.log('all smoothies',smoothies);
+  console.log('all errors', errors);
 
   const fruitHandler = (e) => {
     console.log(e.target.value);
@@ -155,6 +159,7 @@ const CreateSip = () => {
     <div className="flex justify-center mt-4">
       <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8">
         <h3 className="text-2xl mb-4 text-center">Create your own smoothie</h3>
+        
         <section className="flex justify-between items-center pb-2">
           <label className="col-3" htmlFor="name">
             Name:{" "}
@@ -165,8 +170,10 @@ const CreateSip = () => {
             className="form-control"
             value={name}
             name="name"
+            placeholder="Input Smoothie Name"
             onChange={(e) => setName(e.target.value)}
           />
+          {/* {errors.error.name && <p>{errors.error.name.message}</p>} */}
         </section>
         <section className="flex justify-between items-center pb-2">
           <label className="form-label col-3" htmlFor="method">
@@ -240,43 +247,43 @@ const CreateSip = () => {
             <label className="form-label col-3" htmlFor="fruits">Fruits:{" "}</label>
             <div className="grid grid-cols-5">
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="tropicalFruit" value="tropicalFruit" onChange={fruitHandler}/>
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="tropicalFruit" value="Tropical Fruit" onChange={fruitHandler}/>
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="tropicalFruit">Tropical Fruit</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mixedBerry" value="mixedBerry" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mixedBerry" value="Mixed Berry" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="mixedBerry">Mixed Berry</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mango" value="mango" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mango" value="Mango" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="mango">Mango</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pomegranite" value="pomegranite" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pomegranite" value="Pomegranite" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="pomegranite">Pomegranite</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="acaiBerry" value="acaiBerry" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="acaiBerry" value="Acai Berry" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="acaiBerry">Acai Berry</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="blueberry" value="blueberry" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="blueberry" value="Blueberry" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="blueberry">Blueberry</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="banana" value="banana" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="banana" value="Banana" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="banana">Banana</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="raspberry" value="raspberry" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="raspberry" value="Raspberry" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="raspberry">Raspberry</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pineapple" value="pineapple" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pineapple" value="Pineapple" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="pineapple">Pineapple</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="orange" value="orange" onChange={fruitHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="orange" value="Orange" onChange={fruitHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="orange">Orange</label>
                 </div>
             </div>
@@ -286,39 +293,39 @@ const CreateSip = () => {
             <label className="form-label col-3" htmlFor="veggies">Veggies:{" "}</label>
             <div className="grid grid-cols-5">
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="kale" value="kale" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="kale" value="Kale" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="kale">Kale</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="swissChard" value="swissChard" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="swissChard" value="Swiss Chard" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="swissChard">Swiss Chard</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="avocado" value="avocado" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="avocado" value="Avocado" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="avocado">Avocado</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cucumber" value="cucumber" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cucumber" value="Cucumber" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="cucumber">Cucumber</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="spinach" value="spinach" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="spinach" value="Spinach" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="spinach">Spinach</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mint" value="mint" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="mint" value="Mint" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="mint">Mint</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="winterSquash" value="winterSquash" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="winterSquash" value="Winter Squash" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="winterSquash">Squash</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="beets" value="beets" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="beets" value="Beets" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="beets">Beets</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="celery" value="celery" onChange={vegHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="celery" value="Celery" onChange={vegHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="celery">Celery</label>
                 </div>
             </div>
@@ -328,39 +335,39 @@ const CreateSip = () => {
         <label className="form-label" htmlFor="extras">Extras:{" "}</label>
             <div className="grid grid-cols-5">
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="proteinPowderChoc" value="proteinPowderChoc" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="proteinPowderChoc" value="Protein Powder (Chocolate)" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="proteinPowderChoc">Chocolate Protein Powder</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id=" proteinPowderVan" value=" proteinPowderVan" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id=" proteinPowderVan" value="Protein Powder (Vanilla)" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor=" proteinPowderVan">Vanilla Protein Powder</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="chia" value="chia" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="chia" value="Chia" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="chia">Chia</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="aloe" value="aloe" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="aloe" value="Aloe" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="aloe">Aloe</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cinnamon" value="cinnamon" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cinnamon" value="Cinnamon" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="cinnamon">Cinnamon</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cayenne" value="cayenne" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="cayenne" value="Cayenne" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="cayenne">Cayenne</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="flax" value="flax" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="flax" value="Flax" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="flax">Flax</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="gojiBerry" value="gojiBerry" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="gojiBerry" value="Goji Berry" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="gojiBerry">Goji Berry</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="hemp" value="hemp" onChange={extraHandler} />
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="hemp" value="Hemp" onChange={extraHandler} />
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="hemp">Hemp</label>
                 </div>
             </div>
