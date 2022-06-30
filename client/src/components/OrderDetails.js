@@ -22,6 +22,7 @@ const OrderDetails = (props) => {
                 cart.map((order, index) => {
                     return(
                         <div key={index}>
+                            <h1>{order.name}</h1>
                             <p>Method:  </p><p>{order.method}</p>
                             <p>Size:  {order.size}</p>
                             <p>Quantity:  {order.quantity}</p>

@@ -34,6 +34,7 @@ const register = async (req, res) => {
           createdAt: newUser.createdAt,
           updatedAt: newUser.updatedAt,
           cart: newUser.cart,
+          ordered: newUser.ordered
         },
       });
   } catch (e) {
@@ -65,6 +66,7 @@ const login = async (req, res) => {
             createdAt: userDoc.createdAt,
             updatedAt: userDoc.updatedAt,
             cart: userDoc.cart,
+            ordered: userDoc.ordered,
           },
           SECRET
         );
