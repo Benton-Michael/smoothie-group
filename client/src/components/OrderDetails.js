@@ -5,7 +5,6 @@ import {useParams} from "react-router-dom";
 const OrderDetails = (props) => {
     const [cart, setCart] = useState([]);
     const {id} = useParams();
-    const [user, setUser] = useState(null);
     useEffect(() => {
         axios.get(`http://localhost:5001/api/user/cart`, {withCredentials: true})
             .then( res => {
@@ -14,7 +13,6 @@ const OrderDetails = (props) => {
             })
             .catch( err => console.log(err) )
     }, [id])
-    console.log(user)
     return (
         <div>
             <h2>Order Details:</h2>

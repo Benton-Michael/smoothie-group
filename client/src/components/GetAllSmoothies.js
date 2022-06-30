@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 
@@ -8,9 +8,6 @@ const GetAllSmoothies = (props) => {
   const [smoothies, setSmoothies] = useState([]);
   const [user, setUser] = useState(null);
   const { isLoggedIn } = props;
-  const navigate = useNavigate();
-  const [smoothie, setSmoothie] = useState("");
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const userToken = Cookies.get("userToken");
@@ -25,7 +22,6 @@ const GetAllSmoothies = (props) => {
       .get("http://localhost:5001/api/smoothies")
       .then((res) => {
         setSmoothies(res.data);
-        setSmoothie(res.data)
         console.log("Setting", res.data)
         console.log("======================")
         console.log(res.data?._id)
