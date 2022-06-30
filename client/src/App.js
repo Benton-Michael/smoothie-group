@@ -7,6 +7,7 @@ import { useState } from "react";
 import GetAllSmoothies from "./components/GetAllSmoothies";
 import Account from "./components/Account";
 import OrderDetails from "./components/OrderDetails";
+import OneSmoothie from "./components/OneSmoothie";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +26,7 @@ function App() {
         <Route path="/new" element={<CreateSip />} />
         <Route path="/account" element={<Account />} />
         <Route path="/details" element={<OrderDetails />}/>
-
+        <Route path="/smoothie/:id" element={<OneSmoothie />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -34,6 +34,7 @@ const register = async (req, res) => {
           createdAt: newUser.createdAt,
           updatedAt: newUser.updatedAt,
           cart: newUser.cart,
+          ordered: newUser.ordered
         },
       });
   } catch (e) {
@@ -65,6 +66,7 @@ const login = async (req, res) => {
             createdAt: userDoc.createdAt,
             updatedAt: userDoc.updatedAt,
             cart: userDoc.cart,
+            ordered: userDoc.ordered,
           },
           SECRET
         );
@@ -164,7 +166,7 @@ const addToCart = (req, res) => {
   console.log("=====add to cart", req.body)
   User.findOneAndUpdate(
     { _id: user._id },
-    { "$push": { "cart": req.body.smoothieId } },
+    { "$push": { "cart": req.body.smoothie } },
     { new: true},
   )
   .populate(
@@ -174,9 +176,11 @@ const addToCart = (req, res) => {
   .catch(err => res.status(400).json(err));
 };
 
-const getAllUsers = (req, res) => {
-  User.find({})
-      .then(allUsers => res.json(allUsers))
+const getOneUserCart = (req, res) => {
+  const user = jwt.verify(req.cookies.userToken, SECRET);
+  User.findById(user._id)
+  .populate("cart", "_id name size quantity method extras fruits veggies createdAt")
+      .then(oneUser => res.json(oneUser))
       .catch((err) => {
           res.json({ message: 'Something went wrong', error: err })
       });
@@ -189,5 +193,5 @@ module.exports = {
   updateUsersWithOrders,
   getUserOrderedSmoothies,
   addToCart,
-  getAllUsers,
+  getOneUserCart,
 };
