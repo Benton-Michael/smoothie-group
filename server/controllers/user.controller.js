@@ -164,7 +164,7 @@ const addToCart = (req, res) => {
   console.log("=====add to cart", req.body)
   User.findOneAndUpdate(
     { _id: user._id },
-    { "$push": { "cart": req.body.smoothieId } },
+    { "$push": { "cart": req.body.smoothie } },
     { new: true},
   )
   .populate(
@@ -181,6 +181,14 @@ const getAllUsers = (req, res) => {
           res.json({ message: 'Something went wrong', error: err })
       });
 };
+
+const getOneUserCart = (req, res) => {
+  User.findOne({ _id: req.params.id })
+      .then(oneUser => res.json(oneUser))
+      .catch((err) => {
+          res.json({ message: 'Something went wrong', error: err })
+      });
+};
 module.exports = {
   register,
   login,
@@ -190,4 +198,5 @@ module.exports = {
   getUserFavoritedSmoothies,
   addToCart,
   getAllUsers,
+  getOneUserCart,
 };

@@ -9,7 +9,7 @@ const GetAllSmoothies = (props) => {
   const [user, setUser] = useState(null);
   const { isLoggedIn } = props;
   const navigate = useNavigate();
-  const { id } = useParams();
+  const [smoothie, setSmoothie] = useState("");
   const [cart, setCart] = useState([]);
 
 
@@ -26,26 +26,33 @@ const GetAllSmoothies = (props) => {
       .get("http://localhost:5001/api/smoothies")
       .then((res) => {
         setSmoothies(res.data);
+        setSmoothie(res.data)
         console.log("Setting", res.data)
+        console.log("======================")
+        console.log(res.data?._id)
       })
       .catch((err) => {
         console.log("error in retreiving all smoothies", err);
       });
   }, []);
+// 
+  // const addSmoothieToCart = e => {
+  //   e.preventDefault();
+  //   axios.put(`http://localhost:5001/api/add/cart`, {smoothie}, {withCredentials: true})
+  //     .then((res) => {
+  //       console.log("====================")
+  //       console.log(res.data)
+  //       navigate("/details")
+  //       console.log("====================")
+  //       console.log(res.data?._id)
+  //       console.log(res.data?.smoothie?._id)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
 
-  const addSmoothieToCart = e => {
-    e.preventDefault();
-    axios.put(`http://localhost:5001/api/add/cart/${id}`, {cart: cart}, {withCredentials: true})
-      .then((res) => {
-        console.log(res.data.cart, user)
-        setCart([...cart, res.data.cart])
-        navigate("/details")
-        console.log(cart)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+
   return (
     <div className="flex justify-center">
       <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -54,11 +61,13 @@ const GetAllSmoothies = (props) => {
         <div className="p-6 mb-4">
           
           <h5 className="text-gray-900 text-xl font-medium mb-2">
-          {smoothie.name}
+          
+          <Link to={`/smoothie/${smoothie._id}`}>
+            {smoothie.name}
+          </Link>
           </h5>
           <div>
             <div>
-         
             <ul className="mb-2 p-3" key={index}>
               <li>Quantity: {smoothie.quanity}</li>
               <li>Size: {smoothie.size}</li>
@@ -68,14 +77,8 @@ const GetAllSmoothies = (props) => {
               <li>{smoothie.veggies}</li>
               <li>{smoothie.extras}</li>
             </ul>
-          
           </div>
-
-          <button onClick={addSmoothieToCart}>Add To Cart</button>
-
-          {/* <Link to={`/details`}>
-            <span> Add Smoothie to Cart</span>
-            </Link> */}
+          {/* <button onClick={addSmoothieToCart}>Add To Cart</button> */}
           </div>
         
         </div>
