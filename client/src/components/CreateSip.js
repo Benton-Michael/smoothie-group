@@ -157,7 +157,7 @@ const CreateSip = () => {
 
   return (
     <div className="flex justify-center mt-4">
-      <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8">
+      <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8 ring-2 ring-slate-500">
         <h3 className="text-2xl mb-4 text-center">Create your own smoothie</h3>
         
         <section className="flex justify-between items-center pb-2">
