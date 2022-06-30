@@ -162,7 +162,6 @@ const getUserOrderedSmoothies = (req, res) => {
 };
 const addToCart = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
-
   console.log("=====add to cart", req.body)
   User.findOneAndUpdate(
     { _id: user._id },
@@ -173,6 +172,23 @@ const addToCart = (req, res) => {
     "cart",
     "_id method size liquid quantity fruits veggies extras name"
   ).then((user) => res.json(user))
+  .catch(err => res.status(400).json(err));
+};
+
+
+const deleteOneFromCart = (req, res) => {
+  const user = jwt.verify(req.cookies.userToken, SECRET);
+  console.log("=====Delete to cart", req.body)
+  User.findOneAndUpdate(
+    { _id: user._id },
+    { "$pull": { "cart": req.body.smoothie } },
+    { new: true},
+  )
+  // .populate(
+  //   "cart",
+  //   "_id method size liquid quantity fruits veggies extras name"
+  // )
+  .then((user) => res.json(user))
   .catch(err => res.status(400).json(err));
 };
 
@@ -194,4 +210,5 @@ module.exports = {
   getUserOrderedSmoothies,
   addToCart,
   getOneUserCart,
+  deleteOneFromCart,
 };

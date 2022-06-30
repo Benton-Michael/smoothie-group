@@ -13,6 +13,14 @@ const OrderDetails = (props) => {
             })
             .catch( err => console.log(err) )
     }, [id])
+
+    const handleOrderFromCart = () => {
+        //updateUsersWithOrders
+
+        //deleteOneFromCart
+    }
+
+
     return (
         <div>
             <h2>Order Details:</h2>
@@ -32,6 +40,10 @@ const OrderDetails = (props) => {
                 })
             }
             <h3>Order Total:  </h3>
+            <button 
+                            onClick={handleOrderFromCart}
+                            className="btn"
+                            >Order</button>
         </div>
     )
 }
