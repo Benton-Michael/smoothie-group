@@ -6,7 +6,7 @@ const OrderDetails = (props) => {
     const [cart, setCart] = useState([]);
     const {id} = useParams();
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/${id}`)
+        axios.get(`http://localhost:8000/api/`)
             .then( res => {
                 console.log(res.data)
                 setCart(res.data.cart);

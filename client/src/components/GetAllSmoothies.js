@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
-const GetAllSmoothies = () => {
+const GetAllSmoothies = (props) => {
   const [smoothies, setSmoothies] = useState([]);
+  const [user, setUser] = useState(null);
+  const { isLoggedIn } = props;
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [cart, setCart] = useState([]);
 
+
+  useEffect(() => {
+    const userToken = Cookies.get("userToken");
+    if (userToken) {
+      const user = jwtDecode(userToken);
+      setUser(user);
+      console.log("--------");
+    }
+  }, [isLoggedIn]);
   useEffect(() => {
     axios
       .get("http://localhost:5001/api/smoothies")
@@ -17,6 +33,19 @@ const GetAllSmoothies = () => {
       });
   }, []);
 
+  const addSmoothieToCart = e => {
+    e.preventDefault();
+    axios.put(`http://localhost:5001/api/add/cart/${id}`, {cart: cart}, {withCredentials: true})
+      .then((res) => {
+        console.log(res.data.cart, user)
+        setCart([...cart, res.data.cart])
+        navigate("/details")
+        console.log(cart)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   return (
     <div className="flex justify-center">
       <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -41,9 +70,12 @@ const GetAllSmoothies = () => {
             </ul>
           
           </div>
-          <Link to={`/details/`}>
+
+          <button onClick={addSmoothieToCart}>Add To Cart</button>
+
+          {/* <Link to={`/details`}>
             <span> Add Smoothie to Cart</span>
-            </Link>
+            </Link> */}
           </div>
         
         </div>

@@ -11,6 +11,6 @@ module.exports = (app) => {
   );
   
   app.get('/api', UserController.getAllUsers);
-  app.put("/api/add/cart", UserController.addToCart);
+  app.put('/api/add/cart/:id', UserController.addToCart);
   app.get("/api/users/favorites", UserController.getUserFavoritedSmoothies);
 };
