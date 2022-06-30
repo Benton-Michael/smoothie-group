@@ -35,42 +35,8 @@ const GetAllSmoothies = (props) => {
         console.log("error in retreiving all smoothies", err);
       });
   }, []);
-// 
-  // const addSmoothieToCart = e => {
-  //   e.preventDefault();
-  //   axios.put(`http://localhost:5001/api/add/cart`, {smoothie}, {withCredentials: true})
-  //     .then((res) => {
-  //       console.log("====================")
-  //       console.log(res.data)
-  //       navigate("/details")
-  //       console.log("====================")
-  //       console.log(res.data?._id)
-  //       console.log(res.data?.smoothie?._id)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }
 
-
-  const addSmoothieToCart = (e) => {
-    e.preventDefault();
-    axios
-      .put(
-        `http://localhost:5001/api/add/cart/${id}`,
-        { cart: cart },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res.data.cart, user);
-        setCart([...cart, res.data.cart]);
-        navigate("/details");
-        console.log(cart);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
   return (
     <div className="text-center">
       <h1 className="py-3 px-6 border-b border-gray-300 text-2xl font-medium">
@@ -81,10 +47,11 @@ const GetAllSmoothies = (props) => {
           {smoothies.map((smoothie, index) => (
             <div
               key={index}
-              className="p-2 mb-4 mx-4 block rounded-lg shadow-lg bg-white text-center w-96 ring-2 ring-gray-500 mt-4"
-            >
+              className="p-2 mb-4 mx-4 block rounded-lg shadow-lg bg-white text-center w-96 ring-2 ring-gray-500 mt-4">
               <h5 className="text-gray-900 text-xl font-medium mb-2">
-                {smoothie.name}
+                <Link to={`/smoothie/${smoothie._id}`}>
+                  {smoothie.name}
+                </Link>
               </h5>
               <div>
                 <div>
@@ -115,12 +82,6 @@ const GetAllSmoothies = (props) => {
                     <hr />
                   </ul>
                 </div>
-                <button
-                  onClick={addSmoothieToCart}
-                  className="dark:bg-green-800 hover:bg-slate-400 text-white py-1 px-1 rounded"
-                >
-                  Add To Cart
-                </button>
               </div>
             </div>
           ))}
