@@ -9,7 +9,7 @@ const GetAllSmoothies = (props) => {
   const [user, setUser] = useState(null);
   const { isLoggedIn } = props;
   const navigate = useNavigate();
-  const { id } = useParams();
+  const [smoothie, setSmoothie] = useState("");
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -25,12 +25,33 @@ const GetAllSmoothies = (props) => {
       .get("http://localhost:5001/api/smoothies")
       .then((res) => {
         setSmoothies(res.data);
+        setSmoothie(res.data)
+        console.log("Setting", res.data)
+        console.log("======================")
+        console.log(res.data?._id)
         console.log("Setting", res.data);
       })
       .catch((err) => {
         console.log("error in retreiving all smoothies", err);
       });
   }, []);
+// 
+  // const addSmoothieToCart = e => {
+  //   e.preventDefault();
+  //   axios.put(`http://localhost:5001/api/add/cart`, {smoothie}, {withCredentials: true})
+  //     .then((res) => {
+  //       console.log("====================")
+  //       console.log(res.data)
+  //       navigate("/details")
+  //       console.log("====================")
+  //       console.log(res.data?._id)
+  //       console.log(res.data?.smoothie?._id)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
+
 
   const addSmoothieToCart = (e) => {
     e.preventDefault();
