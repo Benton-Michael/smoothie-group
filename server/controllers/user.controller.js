@@ -113,8 +113,8 @@ const getLoggedInUser = async (req, res) => {
 const updateUsersWithOrders = (req, res) => {
   const user = jwt.verify(req.cookies.userToken, SECRET);
   User.findByIdAndUpdate(
-    { _id: user._id },
-    { $push: { orderedSmoothies: [req.body.smoothieId] } },
+    { _id: user.cart._id },
+    { $push: { orderedSmoothies: req.body.cart } },
     {
       new: true,
       runValidators: true,
@@ -128,7 +128,11 @@ const updateUsersWithOrders = (req, res) => {
       Smoothie.findByIdAndUpdate(
         { _id: req.body.smoothieId },
         { ordered: true }
-      ).then((user) => {
+
+      )
+      // console.log(user);
+      .then((user) => {
+        console.log(user);
         res.json(user);
       });
     })
@@ -201,6 +205,7 @@ const getOneUserCart = (req, res) => {
           res.json({ message: 'Something went wrong', error: err })
       });
 };
+
 module.exports = {
   register,
   login,
