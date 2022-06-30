@@ -9,7 +9,7 @@ module.exports = (app) => {
     "/api/users/favorite/smoothies",
     UserController.updateUsersWithFavorites
   );
-  app.get('/api/user', UserController.getOneUserCart);
+  app.get('/api/user/cart', UserController.getOneUserCart);
   app.put('/api/add/cart', UserController.addToCart);
   app.get("/api/users/favorites", UserController.getUserFavoritedSmoothies);
 };
