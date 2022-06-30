@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import axios from "axios";
+// import axios from "axios";
 import Moment from 'react-moment';
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const Account = (props) => {
     return (
         <div>
             <div className="flex justify-center mt-4">
-                <div className="flex flex-col md:flex-row rounded-lg bg-white shadow-lg m-6">
+                <div className="flex flex-col md:flex-row rounded-lg bg-white shadow-lg m-6 ring-2 ring-gray-500 mt-4">
                     <div className="avatar">
                     <img
                     src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
@@ -45,9 +45,9 @@ const Account = (props) => {
                 </div>
             </div>
 
-            <div className="flex justify-around grid grid-cols-2">
+            <div className="flex justify-around grid grid-cols-2" >
                 <div className="flex justify-center">
-                    <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                    <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center ring-2 ring-gray-500 mt-4">
                         <div className="py-3 px-6 border-b border-gray-300">Orders</div>
                         <div className="p-6">
                             <h5 className="text-gray-900 text-xl font-medium mb-2">Your recent orders</h5>
@@ -117,7 +117,7 @@ const Account = (props) => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                    <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center ring-2 ring-gray-500 mt-4">
                         <div className="py-3 px-6 border-b border-gray-300">Favorites</div>
                         <div className="p-6">
                             <h5 className="text-gray-900 text-xl font-medium mb-2">Smoothies you've favorited</h5>
