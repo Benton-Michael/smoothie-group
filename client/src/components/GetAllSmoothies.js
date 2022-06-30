@@ -43,7 +43,7 @@ const GetAllSmoothies = (props) => {
         All Smoothies
       </h1>
       <div className="grid ">
-        <div className="justify-center rounded-lg m-4 shadow-lg bg-white text-center grid grid-cols-3 place-items-center">
+        <div className="justify-center rounded-lg m-4 shadow-l text-center grid grid-cols-3 place-items-center">
           {smoothies.map((smoothie, index) => (
             <div
               key={index}
