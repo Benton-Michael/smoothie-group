@@ -37,7 +37,10 @@ const GetAllSmoothies = (props) => {
     e.preventDefault();
     axios.put(`http://localhost:5001/api/add/cart/${id}`, {cart: cart}, {withCredentials: true})
       .then((res) => {
+        console.log(res.data.cart, user)
+        setCart([...cart, res.data.cart])
         navigate("/details")
+        console.log(cart)
       })
       .catch(err => {
         console.log(err)
