@@ -10,7 +10,7 @@ const DeleteButton = (props) => {
         console.log(res);
         deleteHandler(id);
       })
-      .catrch((err) => {
+      .catch((err) => {
         console.log(err);
       });
   };
