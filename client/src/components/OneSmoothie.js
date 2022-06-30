@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import DeleteButton from "./DeleteButton";
 
 const OneSmoothie = (props) => {
   const [smoothie, setSmoothie] = useState([]);
+  const [smoothies, setSmoothies] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -16,6 +18,10 @@ const OneSmoothie = (props) => {
       })
       .catch((err) => console.log(err));
   }, [id]);
+  const deleteHandler = (deletedId) => {
+    setSmoothies(smoothies.filter((smoothie) => smoothie._id !== deletedId));
+  };
+
   const addSmoothieToCart = (e) => {
     e.preventDefault();
     axios
@@ -72,6 +78,7 @@ const OneSmoothie = (props) => {
           >
             Add To Cart
           </button>
+          <DeleteButton id={smoothie._id} deleteHandler={deleteHandler}/>
         </div>
       </div>
     </div>
