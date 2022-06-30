@@ -43,29 +43,33 @@ const Menu = (props) => {
 
       <div>
         <div className="flex w-full mr-2 items-center">
-          <div>
+          <div className="flex justify-between">
+            <Link to={"/"} className="text-white mr-4" />
+            <Link to={"/all"} className="text-white mr-4">
+              Products
+            </Link>
+            <Link to={"/new"} className="mr-4 text-white">
+              Order
+            </Link>
             <div>
               {user && user ? (
-                <div className="flex w-full mr-2 items-center">
-                  <p className="text-white text-lg mr-4">
+                <div className="flex w-full mr-2 items-center justify-between">
+                  <Link to={"/account"} className="mr-4 text-white">
+                    Account
+                  </Link>
+                  <p className="text-white mr-4">
                     {" "}
                     Welcome Back, {user.firstName}!
                   </p>
-                  <button onClick={handleLogout} className="ml-4 text-white">
+                  <button onClick={handleLogout} className=" text-white mr-2">
                     Logout
                   </button>
                 </div>
-              ) : null}
-              <Link to={"/"} className="text-white" />
-              <Link to={"/all"} className="text-white">
-                Home
-              </Link>
-              <Link to={"/new"} className="ml-4 text-white">
-                Order
-              </Link>
-              <Link to={"/account"} className="ml-4 text-white">
-                Account
-              </Link>
+              ) : (
+                <Link to={"/"} className="text-white">
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>
