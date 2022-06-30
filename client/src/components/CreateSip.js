@@ -264,8 +264,8 @@ const CreateSip = () => {
                   <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="mango">Mango</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pomegranite" value="Pomegranite" onChange={fruitHandler} />
-                  <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="pomegranite">Pomegranite</label>
+                  <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="pomegranate" value="Pomegranate" onChange={fruitHandler} />
+                  <label className="form-check-label px-1 mr-1 inline-block text-gray-800" htmlFor="pomegranate">Pomegranate</label>
                 </div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input px-1 h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="acaiBerry" value="Acai Berry" onChange={fruitHandler} />

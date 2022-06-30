@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Password is required!"],
       minlength: [8, "Password must be at least 8 characters!"],
     },
-    ordered: [
+    orderedSmoothies: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Smoothie" },
     ],
     usersOrders: [
